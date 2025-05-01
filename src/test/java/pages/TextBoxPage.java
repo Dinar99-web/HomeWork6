@@ -7,15 +7,15 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class TextBoxPage {
 
-    private SelenideElement fullNameInput = $("#userName");
-    private SelenideElement emailInput = $("#userEmail");
-    private SelenideElement currentAddressInput = $("#currentAddress");
-    private SelenideElement permanentAddressInput = $("#permanentAddress");
-    private SelenideElement submitButton = $("#submit");
-    private SelenideElement outputName = $("#output #name");
-    private SelenideElement outputEmail = $("#output #email");
-    private SelenideElement outputCurrentAddress = $("#output #currentAddress");
-    private SelenideElement outputPermanentAddress = $("#output #permanentAddress");
+    private final SelenideElement fullNameInput = $("#userName");
+    private final SelenideElement emailInput = $("#userEmail");
+    private final SelenideElement currentAddressInput = $("#currentAddress");
+    private final SelenideElement permanentAddressInput = $("#permanentAddress");
+    private final SelenideElement submitButton = $("#submit");
+    private final SelenideElement outputName = $("#output #name");
+    private final SelenideElement outputEmail = $("#output #email");
+    private final SelenideElement outputCurrentAddress = $("#output #currentAddress");
+    private final SelenideElement outputPermanentAddress = $("#output #permanentAddress");
 
     public TextBoxPage openPage() {
         open("/text-box");

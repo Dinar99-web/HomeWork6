@@ -9,10 +9,15 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class RegistrationPage {
+    public RegistrationPage removeBanners() {
+        executeJavaScript("$('#fixedban').remove()");
+        executeJavaScript("$('footer').remove()");
+        return this;
+    }
     private final String TITLE_TEXT = "Student Registration Form";
     private CalendarComponent calendarComponent = new CalendarComponent();
     private RegistrationResultsModal registrationResultsModal = new RegistrationResultsModal();
-    private SelenideElement
+    private final SelenideElement
             firstNameInput = $("#firstName"),
             lastNameInput = $("#lastName"),
             userEmailInput = $("#userEmail"),
@@ -29,10 +34,8 @@ public class RegistrationPage {
 
     public RegistrationPage openPage() {
         open("/automation-practice-form");
-        executeJavaScript("$('footer').remove();");
-        executeJavaScript("$('#fixedban').remove();");
+        removeBanners();
         $(".practice-form-wrapper").shouldHave(text(TITLE_TEXT));
-
         return this;
     }
     public RegistrationPage setFirstName(String firstName) {

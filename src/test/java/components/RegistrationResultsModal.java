@@ -8,8 +8,8 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class RegistrationResultsModal {
     private final String MODAL_TITLE = "Thanks for submitting the form";
-    private SelenideElement modalContent = $(".modal-content");
-    private SelenideElement closeButton = $("#closeLargeModal");
+    private final SelenideElement modalContent = $(".modal-content");
+    private final SelenideElement closeButton = $("#closeLargeModal");
 
     public RegistrationResultsModal verifyModalAppears() {
         modalContent.shouldHave(text(MODAL_TITLE));
