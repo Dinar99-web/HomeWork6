@@ -5,13 +5,17 @@ plugins {
 repositories {
     mavenCentral()
 }
+
 dependencies {
-    testImplementation(
-            "com.codeborne:selenide:7.7.3",
-            "org.junit.jupiter:junit-jupiter:5.12.1",
-            'org.slf4j:slf4j-simple:2.0.17'
+    testImplementation (
+            'com.codeborne:selenide:6.19.1',
+            'com.github.javafaker:javafaker:1.0.2',
+            'org.junit.jupiter:junit-jupiter:5.9.3'
     )
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
 }
 
 test {
