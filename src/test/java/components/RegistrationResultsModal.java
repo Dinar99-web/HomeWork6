@@ -17,8 +17,8 @@ public class RegistrationResultsModal {
         return this;
     }
     public RegistrationResultsModal verifyResult(String key, String value) {
-        $$("table tr").findBy(text(key)).shouldHave(text(value));
-
+        // Измененная логика:
+        $$("table tr").findBy(text(key)).$("td", 1).shouldHave(text(value));
         return this;
     }
 
