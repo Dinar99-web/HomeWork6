@@ -8,6 +8,7 @@ import utils.TestDataGenerator;
 
 public class JavaFakerTest {
     RegistrationPage registrationPage = new RegistrationPage();
+    TestDataGenerator testData = new TestDataGenerator();
 
     @BeforeAll
     static void configureBrowserSettings() {
@@ -18,24 +19,47 @@ public class JavaFakerTest {
 
     @Test
     void fillTheFormTest() {
-        String firstName = TestDataGenerator.getFirstName();
-        String lastName = TestDataGenerator.getLastName();
-        String userEmail = TestDataGenerator.getEmail();
-        String gender = TestDataGenerator.getGender();
-        String userNumber = TestDataGenerator.getPhoneNumber();
-        String day = TestDataGenerator.getDayOfMonth();
-        String month = TestDataGenerator.getMonth();
-        String year = TestDataGenerator.getYear();
-        String subject = TestDataGenerator.getSubject();
-        String hobby = TestDataGenerator.getHobby();
-        String picture = TestDataGenerator.getPictureName();
-        String currentAddress = TestDataGenerator.getAddress();
-        String state = TestDataGenerator.getState();
-        String city = TestDataGenerator.getCity(state);
+        String firstName = testData.getFirstName();
+        String lastName = testData.getLastName();
+        String userEmail = testData.getEmail();
+        String gender = testData.getGender();
+        String userNumber = testData.getPhoneNumber();
+        String day = testData.getDayOfMonth();
+        String month = testData.getMonth();
+        String year = testData.getYear();
+        String subject = testData.getSubject();
+        String hobby = testData.getHobby();
+        String picture = testData.getPictureName();
+        String currentAddress = testData.getAddress();
+        String state = testData.getState();
+        String city = testData.getCity(state);
 
         registrationPage.openPage()
                 .setFirstName(firstName)
                 .setLastName(lastName)
+                .setUserEmail(userEmail)
+                .setGender(gender)
+                .setUserNumber(userNumber)
+                .setBirthDate(day, month, year)
+                .setSubject(subject)
+                .setHobby(hobby)
+                .uploadPicture(picture)
+                .setCurrentAddress(currentAddress)
+                .setState(state)
+                .setCity(city)
                 .submitForm();
+
+        registrationPage.verifyResultsModalAppears()
+                .verifyResult("Student Name", firstName + " " + lastName)
+                .verifyResult("Student Email", userEmail)
+                .verifyResult("Gender", gender)
+                .verifyResult("Mobile", userNumber)
+                .verifyResult("Date of Birth", day + " " + month + "," + year)
+                .verifyResult("Subjects", subject)
+                .verifyResult("Hobbies", hobby)
+                .verifyResult("Picture", picture)
+                .verifyResult("Address", currentAddress)
+                .verifyResult("State and City", state + " " + city)
+                .closeModal();
     }
 }
