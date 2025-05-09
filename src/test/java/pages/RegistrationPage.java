@@ -82,7 +82,7 @@ public class RegistrationPage {
     }
 
     public RegistrationPage setHobby(String hobby) {
-        hobbiesCheckbox.click();
+        $("label[for='" + hobby.toLowerCase() + "']").click();
 
         return this;
     }
