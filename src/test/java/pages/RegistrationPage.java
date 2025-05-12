@@ -82,7 +82,7 @@ public class RegistrationPage {
     }
 
     public RegistrationPage setHobby(String hobby) {
-        $("label[for='" + hobby.toLowerCase() + "']").click();
+        $("#hobbiesWrapper").$(byText(hobby)).click();
 
         return this;
     }
@@ -100,15 +100,15 @@ public class RegistrationPage {
     }
 
     public RegistrationPage setState(String state) {
-        stateDropdown.click();
-        $("#react-select-3-option-3").click();
+        $("#state").click();
+        $(byText(state)).click();
 
         return this;
     }
 
     public RegistrationPage setCity(String city) {
-        cityDropdown.click();
-        $("#react-select-4-option-0").click();
+        $("#city").click();
+        $(byText(city)).click();
 
         return this;
     }
