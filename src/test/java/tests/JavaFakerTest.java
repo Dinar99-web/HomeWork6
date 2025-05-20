@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
 import utils.TestDataGenerator;
 
-@Tag("demoqa")
+
 public class JavaFakerTest {
     RegistrationPage registrationPage = new RegistrationPage();
     TestDataGenerator testData = new TestDataGenerator();
@@ -20,6 +20,7 @@ public class JavaFakerTest {
     }
 
     @Test
+    @Tag("demoqa")
     void fillTheFormTest() {
         String firstName = testData.getFirstName();
         String lastName = testData.getLastName();
