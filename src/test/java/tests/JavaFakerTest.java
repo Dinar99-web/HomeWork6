@@ -2,10 +2,12 @@ package tests;
 
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
 import utils.TestDataGenerator;
 
+@Tag("demoqa")
 public class JavaFakerTest {
     RegistrationPage registrationPage = new RegistrationPage();
     TestDataGenerator testData = new TestDataGenerator();
