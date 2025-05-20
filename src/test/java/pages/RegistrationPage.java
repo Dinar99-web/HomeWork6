@@ -100,7 +100,8 @@ public class RegistrationPage {
     }
 
     public RegistrationPage setState(String state) {
-        $("#state").click();
+        //$("#state").click();
+        $("#state").scrollIntoView(true).click();
         $(byText(state)).click();
 
         return this;
