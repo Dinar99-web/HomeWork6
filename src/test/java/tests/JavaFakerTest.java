@@ -21,11 +21,22 @@ public class JavaFakerTest {
 
     @BeforeAll
     static void configureBrowserSettings() {
-        Configuration.baseUrl = "https://demoqa.com";
-        Configuration.browserSize = "1920x1080";
+        // Получаем параметры из Jenkins или используем значения по умолчанию
+        String browser = System.getProperty("browser", "chrome");
+        String browserVersion = System.getProperty("browserVersion", "100.0");
+        String browserSize = System.getProperty("browserSize", "1920x1080");
+        String remoteUrl = System.getProperty("remoteUrl", "https://user1:1234@selenoid.autotests.cloud/wd/hub");
+        String baseUrl = System.getProperty("baseUrl", "https://demoqa.com");
+
+        Configuration.baseUrl = baseUrl;
+        Configuration.browser = browser;
+        Configuration.browserVersion = browserVersion;
+        Configuration.browserSize = browserSize;
         Configuration.pageLoadStrategy = "eager";
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+        Configuration.remote = remoteUrl;
+
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
+
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
                 "enableVNC", true,
