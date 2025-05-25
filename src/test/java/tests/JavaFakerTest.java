@@ -21,7 +21,6 @@ public class JavaFakerTest {
 
     @BeforeAll
     static void configureBrowserSettings() {
-        // Получаем параметры из Jenkins или используем значения по умолчанию
         String browser = System.getProperty("browser", "chrome");
         String browserVersion = System.getProperty("browserVersion", "128.0");
         String browserSize = System.getProperty("browserSize", "1920x1080");
