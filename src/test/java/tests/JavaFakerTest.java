@@ -25,8 +25,10 @@ public class JavaFakerTest {
         String browser = System.getProperty("browser", "chrome");
         String browserVersion = System.getProperty("browserVersion", "128.0");
         String browserSize = System.getProperty("browserSize", "1920x1080");
-        String remoteUrl = System.getProperty("remoteUrl", "selenoid.autotests.cloud");
+        String remoteUrl = System.getProperty("remoteUrl", "https://user1:1234@selenoid.autotests.cloud/wd/hub");
         String baseUrl = System.getProperty("baseUrl", "https://demoqa.com");
+        System.getProperty("selenoid_login", "user1");
+        System.getProperty("selenoid_password", "1234");
 
         Configuration.baseUrl = baseUrl;
         Configuration.browser = browser;
