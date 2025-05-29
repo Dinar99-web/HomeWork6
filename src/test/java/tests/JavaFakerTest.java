@@ -7,6 +7,7 @@ import io.qameta.allure.Step;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -21,22 +22,12 @@ public class JavaFakerTest {
 
     @BeforeAll
     static void configureBrowserSettings() {
-        String browser = System.getProperty("browser", "chrome");
-        String browserVersion = System.getProperty("browserVersion", "128.0");
-        String browserSize = System.getProperty("browserSize", "1920x1080");
-        String remoteUrl = System.getProperty("remoteUrl", "https://user1:1234@selenoid.autotests.cloud/wd/hub");
-        String baseUrl = System.getProperty("baseUrl", "https://demoqa.com");
-        System.getProperty("selenoid_login", "user1");
-        System.getProperty("selenoid_password", "1234");
-
-        Configuration.baseUrl = baseUrl;
-        Configuration.browser = browser;
-        Configuration.browserVersion = browserVersion;
-        Configuration.browserSize = browserSize;
+        Configuration.baseUrl = System.getProperty("baseUrl", "https://demoqa.com");
+        Configuration.browser = System.getProperty("browser", "chrome");
+        Configuration.browserVersion = System.getProperty("browserVersion", "128.0");
+        Configuration.browserSize = System.getProperty("browserSize", "1920x1080");
+        Configuration.remote = System.getProperty("remoteUrl", "https://user1:1234@selenoid.autotests.cloud/wd/hub");
         Configuration.pageLoadStrategy = "eager";
-        Configuration.remote = remoteUrl;
-
-        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
@@ -45,13 +36,18 @@ public class JavaFakerTest {
         ));
         Configuration.browserCapabilities = capabilities;
     }
+
+    @BeforeEach
+    void addListener() {
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
+    }
+
     @AfterEach
     void addAttachments() {
         Attach.screenshotAs("Last screenshot");
         Attach.pageSource();
         Attach.browserConsoleLogs();
         Attach.addVideo();
-
     }
 
     @Test
@@ -99,6 +95,7 @@ public class JavaFakerTest {
     public void setFirstName(String firstName) {
         registrationPage.setFirstName(firstName);
     }
+
     @Step("Заполняем фамилию: {lastName}")
     public void setLastName(String lastName) {
         registrationPage.setLastName(lastName);
